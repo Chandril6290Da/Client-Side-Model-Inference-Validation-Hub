@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Inference Lab — Model Validation Hub</title>
+<meta name="description" content="Interactive client-side model inference and validation workspace.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{font-family:Manrope,system-ui,sans-serif;color-scheme:dark;--bg:#0a0d12;--panel:#111720;--panel2:#151e29;--line:#273342;--text:#edf3fa;--muted:#94a4b7;--accent:#b7f36b;--accent-ink:#15210c;--blue:#7ab7ff;--red:#ff8b8b;--shadow:0 20px 60px #0003;--radius:20px}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f6f8;--panel:#fff;--panel2:#f5f8fa;--line:#dce4eb;--text:#17212c;--muted:#5f7182;--accent:#5b8f21;--accent-ink:#fff;--blue:#236dc0;--red:#c33f4b;--shadow:0 18px 45px #24364a12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);line-height:1.55}button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.app-shell{min-height:100vh;display:grid;grid-template-columns:244px minmax(0,1fr)}.sidebar{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:26px 17px;background:var(--panel);display:flex;flex-direction:column;gap:30px}.brand{display:flex;align-items:center;gap:12px;padding:0 9px}.brand-mark{height:38px;width:38px;border-radius:13px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:17px}.brand strong{display:block;font-size:15px;letter-spacing:-.4px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.6px;text-transform:uppercase;margin-top:2px}.nav-label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0 12px;margin-bottom:9px}.nav-list{display:grid;gap:6px}.nav-link{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;color:var(--muted);font-size:13px;font-weight:700;transition:background .2s,color .2s}.nav-link i{width:18px;text-align:center}.nav-link:hover,.nav-link.active{background:var(--panel2);color:var(--text)}.nav-link.active{box-shadow:inset 3px 0 var(--accent)}.nav-link.active i{color:var(--accent)}.side-bottom{margin-top:auto}.status-card{border:1px solid var(--line);border-radius:15px;padding:14px;background:var(--panel2)}.status-dot{display:inline-block;width:7px;height:7px;background:var(--accent);border-radius:50%;margin-right:7px;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 15%,transparent)}.status-card p{font-size:11px;color:var(--muted);margin:8px 0 0}.main{min-width:0;padding:25px clamp(18px,3.2vw,48px) 44px;max-width:1600px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding-bottom:26px;border-bottom:1px solid var(--line)}.crumb{font-size:12px;color:var(--muted)}.crumb strong{color:var(--text);font-weight:700}.top-actions{display:flex;align-items:center;gap:10px}.status-pill{display:flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;font-weight:700}.icon-btn{height:38px;width:38px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px}.avatar{height:34px;width:34px;display:grid;place-items:center;border-radius:50%;background:var(--panel2);border:1px solid var(--line);font-size:11px;font-weight:800}.hero{padding:34px 0 26px;display:flex;justify-content:space-between;align-items:end;gap:22px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:800;display:flex;align-items:center;gap:8px}.eyebrow:before{content:"";width:22px;height:1px;background:var(--accent)}h1{font-size:clamp(27px,3.5vw,43px);letter-spacing:-1.8px;line-height:1.12;margin:12px 0 10px;font-weight:800}.hero p{color:var(--muted);font-size:13px;max-width:680px;margin:0}.hero-tag{white-space:nowrap;border:1px solid var(--line);border-radius:12px;padding:11px 13px;color:var(--muted);font-size:11px}.hero-tag strong{color:var(--text);font-family:"DM Mono",monospace}.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:0 0 22px}.metric{padding:17px 18px;background:var(--panel);border:1px solid var(--line);border-radius:16px;min-width:0}.metric-top{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:11px;font-weight:700;gap:8px}.metric-top i{color:var(--accent)}.metric-value{font-size:25px;font-weight:800;letter-spacing:-1px;margin-top:10px}.metric-note{font-size:10px;color:var(--muted);margin-top:2px}.work-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(330px,.92fr);gap:16px;align-items:stretch}.panel{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}.panel-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:20px}.panel-title{display:flex;align-items:center;gap:11px}.panel-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 13%,transparent);color:var(--accent);flex:none}.panel h2{font-size:15px;letter-spacing:-.3px;margin:0}.panel-sub{font-size:11px;color:var(--muted);margin:4px 0 0}.mini-tag{border:1px solid var(--line);border-radius:8px;padding:5px 8px;color:var(--muted);font-size:10px;white-space:nowrap}.field-label{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:800;margin-bottom:9px}.field-label span:last-child{color:var(--muted);font-weight:500}.text-input{width:100%;resize:vertical;min-height:145px;border:1px solid var(--line);border-radius:13px;padding:14px;background:var(--bg);color:var(--text);font-size:12px;line-height:1.7;transition:border .2s}.text-input:focus{border-color:var(--accent);outline:none}.input-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin-top:7px}.primary-btn{display:flex;justify-content:center;align-items:center;gap:9px;width:100%;padding:13px 16px;margin-top:16px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;font-size:12px;font-weight:800;transition:transform .2s,filter .2s}.primary-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.result-box{display:none;margin-top:17px;padding:15px;border:1px solid color-mix(in srgb,var(--accent) 45%,var(--line));border-radius:13px;background:color-mix(in srgb,var(--accent) 6%,var(--panel2))}.result-head{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:12px;font-weight:800}.confidence{color:var(--accent);font-family:"DM Mono",monospace}.bar-track{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin:11px 0 8px}.bar-fill{height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .45s}.result-caption{font-size:10px;color:var(--muted)}.range-group{margin:20px 0}.range-head{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:700;margin-bottom:12px}.range-head output{font-family:"DM Mono",monospace;color:var(--accent)}input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer}.range-scale{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin-top:4px}.sim-summary{margin-top:22px;padding:15px;background:var(--bg);border:1px solid var(--line);border-radius:13px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.sim-kpi span{display:block;color:var(--muted);font-size:10px}.sim-kpi strong{font:500 20px "DM Mono",monospace;display:block;margin-top:4px}.sim-kpi:last-child{border-left:1px solid var(--line);padding-left:17px}.notice{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:10px;line-height:1.6;margin-top:13px}.notice i{color:var(--blue);margin-top:2px}.lower-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);gap:16px;margin-top:16px}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}.cm-table{width:100%;border-collapse:collapse;min-width:530px;text-align:left;font-size:11px}.cm-table th{padding:12px;background:var(--panel2);color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:800}.cm-table td{padding:13px 12px;border-top:1px solid var(--line);font-family:"DM Mono",monospace}.cm-table td:first-child{font-family:Manrope,sans-serif;font-weight:700}.cm-cell{cursor:help}.cm-cell.diagonal{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-weight:700}.cm-cell.off{color:var(--red);background:color-mix(in srgb,var(--red) 5%,transparent)}.table-foot{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:10px;color:var(--muted)}.legend{display:inline-flex;align-items:center;gap:6px}.legend i{width:8px;height:8px;border-radius:3px;background:var(--accent)}.legend.error i{background:var(--red)}.feature-row{margin:20px 0 25px}.feature-title{display:flex;justify-content:space-between;gap:12px;font-size:11px;font-weight:700;margin-bottom:10px}.feature-title output{font-family:"DM Mono",monospace;color:var(--accent)}.feature-track{height:9px;background:var(--line);border-radius:99px;overflow:hidden}.feature-fill{height:100%;background:linear-gradient(90deg,var(--accent),#d8f7a6);border-radius:99px;width:95%;transition:width .2s}.feature-fill.blue{background:linear-gradient(90deg,var(--blue),#a9d1ff)}.feature-foot{font-size:10px;color:var(--muted);line-height:1.7}.footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-top:22px;padding:17px 2px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}.footer a{color:var(--text)}.mobile-menu{display:none}
+@media(max-width:1100px){.app-shell{grid-template-columns:205px minmax(0,1fr)}.sidebar{padding:22px 12px}.work-grid,.lower-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.app-shell{display:block}.sidebar{display:none}.main{padding:17px 14px 30px}.topbar{padding-bottom:18px}.mobile-menu{display:inline-grid}.status-pill{display:none}.hero{padding:25px 0 21px;align-items:flex-start;flex-direction:column}.hero-tag{white-space:normal}.metric-grid{gap:9px}.metric{padding:14px}.metric-value{font-size:22px}.panel{padding:17px;border-radius:16px}.panel-head{margin-bottom:17px}.lower-grid{gap:12px}.footer{font-size:9px}.cm-table{min-width:490px}}
+@media(max-width:380px){.metric-grid{grid-template-columns:1fr 1fr}.metric-value{font-size:19px}.top-actions{gap:6px}.avatar{display:none}.panel-title{gap:8px}.panel-icon{height:33px;width:33px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="#overview"><span class="brand-mark"><i class="fa-solid fa-wave-square"></i></span><span><strong>Inference Lab</strong><small>Model validation hub</small></span></a>
+    <div><div class="nav-label">Workspace</div><nav class="nav-list">
+      <a class="nav-link active" href="#overview"><i class="fa-solid fa-grid-2"></i> Overview</a>
+      <a class="nav-link" href="#inference"><i class="fa-solid fa-terminal"></i> Inference sandbox</a>
+      <a class="nav-link" href="#tuning"><i class="fa-solid fa-sliders"></i> Parameter tuning</a>
+      <a class="nav-link" href="#validation"><i class="fa-solid fa-chart-column"></i> Validation matrix</a>
+      <a class="nav-link" href="#sensitivity"><i class="fa-solid fa-bullseye"></i> Feature sensitivity</a>
+    </nav></div>
+    <div class="side-bottom"><div class="nav-label">Runtime</div><div class="status-card"><span class="status-dot"></span><strong style="font-size:11px">Browser-side demo</strong><p>Interactive calculations run locally in this page. No model server is connected.</p></div></div>
+  </aside>
+  <main class="main" id="overview">
+    <header class="topbar"><div class="crumb"><span class="mobile-menu"><button class="icon-btn" aria-label="Jump to inference sandbox" onclick="document.getElementById('inference').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-bars"></i></button> &nbsp; / &nbsp;</span>Workspace <span aria-hidden="true">/</span> <strong>Model validation</strong></div>
+      <div class="top-actions"><span class="status-pill"><span class="status-dot"></span> LOCAL ENVIRONMENT</span><button class="icon-btn" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme"><i class="fa-solid fa-sun"></i></button><span class="avatar" aria-label="User workspace">CG</span></div>
+    </header>
+    <section class="hero"><div><div class="eyebrow">Experiment workspace / 01</div><h1>Model inference &amp;<br>validation hub<span style="color:var(--accent)">.</span></h1><p>Explore text classification heuristics, adjust training parameters, and inspect validation examples in one focused workspace.</p></div><div class="hero-tag"><strong>BUILD 1.0.0</strong> &nbsp;·&nbsp; CLIENT-SIDE</div></section>
+    <section class="metric-grid" aria-label="Workspace summary">
+      <div class="metric"><div class="metric-top">Inference mode <i class="fa-solid fa-bolt"></i></div><div class="metric-value">Live</div><div class="metric-note">Keyword-based heuristic</div></div>
+      <div class="metric"><div class="metric-top">Tuning controls <i class="fa-solid fa-sliders"></i></div><div class="metric-value">03</div><div class="metric-note">Learning rate · batch · dropout</div></div>
+      <div class="metric"><div class="metric-top">Validation classes <i class="fa-solid fa-layer-group"></i></div><div class="metric-value">03</div><div class="metric-note">Illustrative matrix categories</div></div>
+      <div class="metric"><div class="metric-top">Execution <i class="fa-solid fa-microchip"></i></div><div class="metric-value">Local</div><div class="metric-note">No backend connection required</div></div>
+    </section>
+    <section class="work-grid">
+      <article class="panel" id="inference">
+        <div class="panel-head"><div><div class="panel-title"><span class="panel-icon"><i class="fa-solid fa-terminal"></i></span><div><h2>Text inference sandbox</h2><p class="panel-sub">Enter a sentence to inspect the heuristic output.</p></div></div></div><span class="mini-tag">INPUT 01</span></div>
+        <label class="field-label" for="modelTextInput"><span>INPUT TEXT</span><span id="charCount">0 characters</span></label>
+        <textarea id="modelTextInput" class="text-input" maxlength="2000" placeholder="Try: Building a Python machine learning model for real-time data analysis…" aria-describedby="inferenceHelp"></textarea>
+        <div class="input-meta" id="inferenceHelp"><span>Up to 2,000 characters</span><span>Processed in this browser</span></div>
+        <button class="primary-btn" id="runInferenceBtn"><i class="fa-solid fa-play"></i> Run inference <i class="fa-solid fa-arrow-right" style="margin-left:auto"></i></button>
+        <div id="inferenceResult" class="result-box" aria-live="polite">
+          <div class="result-head"><span id="infClassLabel">Class: AI/ML Core</span><span id="infConfidenceVal" class="confidence">95.2%</span></div>
+          <div class="bar-track"><div id="infConfidenceBar" class="bar-fill"></div></div>
+          <div class="result-caption" id="inferenceExplanation">Heuristic score based on keyword matches — not a trained model prediction.</div>
+        </div>
+      </article>
+      <article class="panel" id="tuning">
+        <div class="panel-head"><div class="panel-title"><span class="panel-icon"><i class="fa-solid fa-sliders"></i></span><div><h2>Parameter tuning</h2><p class="panel-sub">Adjust values to see the demo estimates update.</p></div></div><span class="mini-tag">SIMULATION</span></div>
+        <div class="range-group"><div class="range-head"><label for="lrSlider">Learning rate (α)</label><output id="lrVal" for="lrSlider">0.0010</output></div><input type="range" id="lrSlider" min="0.0001" max="0.05" step="0.0005" value="0.001" aria-label="Learning rate"><div class="range-scale"><span>0.0001 · slower</span><span>0.05 · faster</span></div></div>
+        <div class="range-group"><div class="range-head"><label for="batchSlider">Batch size</label><output id="batchVal" for="batchSlider">32</output></div><input type="range" id="batchSlider" min="8" max="128" step="8" value="32" aria-label="Batch size"><div class="range-scale"><span>8 samples</span><span>128 samples</span></div></div>
+        <div class="range-group"><div class="range-head"><label for="dropoutSlider">Dropout rate</label><output id="dropoutVal" for="dropoutSlider">0.20</output></div><input type="range" id="dropoutSlider" min="0" max="0.5" step="0.05" value="0.2" aria-label="Dropout rate"><div class="range-scale"><span>0.00 · none</span><span>0.50 · high</span></div></div>
+        <div class="sim-summary"><div class="sim-kpi"><span>Simulated loss</span><strong id="simLoss">0.084</strong></div><div class="sim-kpi"><span>Estimated epochs</span><strong id="simEpochs">50</strong></div></div>
+        <div class="notice"><i class="fa-solid fa-circle-info"></i><span>These values are illustrative formulas for UI exploration, not results from model training.</span></div>
+      </article>
+    </section>
+    <section class="lower-grid">
+      <article class="panel" id="validation">
+        <div class="panel-head"><div class="panel-title"><span class="panel-icon"><i class="fa-solid fa-table-cells"></i></span><div><h2>Confusion matrix</h2><p class="panel-sub">Illustrative counts for three example classes.</p></div></div><span class="mini-tag">SAMPLE DATA</span></div>
+        <div class="table-wrap"><table class="cm-table"><thead><tr><th>Actual class</th><th>AI agent</th><th>Full-stack</th><th>Robotics / IoT</th><th>Precision*</th></tr></thead><tbody>
+          <tr><td>AI agent</td><td class="cm-cell diagonal" title="Correctly classified example count">142</td><td class="cm-cell off" title="Misclassified example count">4</td><td class="cm-cell off" title="Misclassified example count">2</td><td>95.9%</td></tr>
+          <tr><td>Full-stack</td><td class="cm-cell off" title="Misclassified example count">3</td><td class="cm-cell diagonal" title="Correctly classified example count">180</td><td class="cm-cell off" title="Misclassified example count">1</td><td>97.8%</td></tr>
+          <tr><td>Robotics / IoT</td><td class="cm-cell off" title="Misclassified example count">1</td><td class="cm-cell off" title="Misclassified example count">3</td><td class="cm-cell diagonal" title="Correctly classified example count">115</td><td>96.6%</td></tr>
+        </tbody></table></div>
+        <div class="table-foot"><span class="legend"><i></i> Correct class count</span><span class="legend error"><i></i> Other class count</span></div>
+        <div class="notice"><i class="fa-solid fa-circle-info"></i><span>*Displayed counts and precision values are retained sample figures; they are not generated by the text sandbox or a connected validation dataset.</span></div>
+      </article>
+      <article class="panel" id="sensitivity">
+        <div class="panel-head"><div class="panel-title"><span class="panel-icon"><i class="fa-solid fa-bullseye"></i></span><div><h2>Feature sensitivity</h2><p class="panel-sub">Adjust relative weights for the demo.</p></div></div><span class="mini-tag">WEIGHTS</span></div>
+        <div class="feature-row"><div class="feature-title"><label for="f1Slider">Python / algorithm weight</label><output id="f1Val" for="f1Slider">95%</output></div><input type="range" id="f1Slider" min="50" max="100" value="95" aria-label="Python and algorithm weight"><div class="feature-track"><div class="feature-fill" id="f1Bar"></div></div></div>
+        <div class="feature-row"><div class="feature-title"><label for="f2Slider">Full-stack scale weight</label><output id="f2Val" for="f2Slider">90%</output></div><input type="range" id="f2Slider" min="50" max="100" value="90" aria-label="Full-stack scale weight"><div class="feature-track"><div class="feature-fill blue" id="f2Bar"></div></div></div>
+        <p class="feature-foot">These sliders change the displayed weights only. They do not retrain a model or alter the sample confusion matrix.</p>
+      </article>
+    </section>
+    <footer class="footer"><span>Inference Lab <span aria-hidden="true">·</span> Client-side model exploration</span><span>Designed for clarity · <a href="#overview">Back to top ↑</a></span></footer>
+  </main>
+</div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  // Theme is stored separately from the original portfolio's theme key.
+  const themeKey = 'inference-lab-theme';
+  const storedTheme = localStorage.getItem(themeKey);
+  if (storedTheme === 'light' || storedTheme === 'dark') document.documentElement.dataset.theme = storedTheme;
+  const themeToggle = $('themeToggle');
+  function syncThemeButton() {
+    const light = document.documentElement.dataset.theme === 'light';
+    themeToggle.innerHTML = light ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    themeToggle.setAttribute('aria-label', light ? 'Switch to dark theme' : 'Switch to light theme');
+  }
+  syncThemeButton();
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem(themeKey, next);
+    syncThemeButton();
+  });
+
+  const textInput = $('modelTextInput');
+  textInput.addEventListener('input', () => { $('charCount').textContent = `${textInput.value.length} characters`; });
+  $('runInferenceBtn').addEventListener('click', () => {
+    const text = textInput.value.trim();
+    if (!text) {
+      textInput.focus();
+      textInput.setCustomValidity('Enter some text before running inference.');
+      textInput.reportValidity();
+      return;
+    }
+    textInput.setCustomValidity('');
+    const keywords = ['ai', 'model', 'python', 'architecture', 'data', 'ml', 'neural', 'system'];
+    const normalized = text.toLowerCase();
+    const words = normalized.split(/[^a-z0-9]+/).filter(Boolean);
+    const matches = keywords.filter(k => words.includes(k)).length;
+    const confidence = Math.min(99.4, 75 + matches * 5.5).toFixed(1);
+    $('inferenceResult').style.display = 'block';
+    $('infConfidenceVal').textContent = `${confidence}% heuristic score`;
+    $('infConfidenceBar').style.width = `${confidence}%`;
+    $('infClassLabel').textContent = matches > 0 ? 'Class: AI/ML Core' : 'Class: General Domain Input';
+    $('inferenceExplanation').textContent = `${matches} keyword match${matches === 1 ? '' : 'es'} found. This is a rule-based demo score, not a trained model prediction.`;
+  });
+
+  const lr = $('lrSlider'), batch = $('batchSlider'), dropout = $('dropoutSlider');
+  function updateHyperparameters() {
+    const lrv = Number(lr.value), bv = Number(batch.value), dv = Number(dropout.value);
+    $('lrVal').textContent = lrv.toFixed(4);
+    $('batchVal').textContent = bv;
+    $('dropoutVal').textContent = dv.toFixed(2);
+    $('simLoss').textContent = (0.02 + lrv * 12 + (32 / bv) * 0.03 + dv * 0.1).toFixed(3);
+    $('simEpochs').textContent = Math.max(10, Math.round(50 - lrv * 500 + bv / 8));
+  }
+  [lr, batch, dropout].forEach(el => el.addEventListener('input', updateHyperparameters));
+  const f1 = $('f1Slider'), f2 = $('f2Slider');
+  function updateWeights() {
+    $('f1Val').textContent = `${f1.value}%`; $('f2Val').textContent = `${f2.value}%`;
+    $('f1Bar').style.width = `${f1.value}%`; $('f2Bar').style.width = `${f2.value}%`;
+  }
+  [f1, f2].forEach(el => el.addEventListener('input', updateWeights));
+  updateHyperparameters(); updateWeights();
+  document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => {
+    document.querySelectorAll('.nav-link').forEach(item => item.classList.remove('active'));
+    link.classList.add('active');
+  }));
+})();
+</script>
+</body>
+</html>
